@@ -13,8 +13,18 @@ const TaskBoard = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSkill, setSelectedSkill] = useState('');
 
-  // Extract all unique skills from tasks for the filter dropdown
-  const allSkills = [...new Set(tasks.flatMap(task => task.skillsRequired))].sort();
+  // Comprehensive list of tech skills
+  const PREDEFINED_SKILLS = [
+    'React', 'Node.js', 'Python', 'Java', 'JavaScript', 'TypeScript', 'C++', 'C#', 
+    'Ruby', 'Go', 'Rust', 'PHP', 'Swift', 'Kotlin', 'HTML', 'CSS', 'SQL', 'NoSQL', 
+    'MongoDB', 'PostgreSQL', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'Git', 'Figma', 
+    'UI/UX', 'Machine Learning', 'Data Science', 'Angular', 'Vue.js', 'Express.js',
+    'Django', 'Flask', 'Spring Boot', 'Next.js', 'Tailwind CSS', 'GraphQL', 'REST API'
+  ];
+
+  // Combine predefined skills with any unique skills from current tasks, sorted alphabetically
+  const dynamicSkills = [...new Set(tasks.flatMap(task => task.skillsRequired))];
+  const allSkills = [...new Set([...PREDEFINED_SKILLS, ...dynamicSkills])].sort((a, b) => a.localeCompare(b));
 
   useEffect(() => {
     fetchTasks();
