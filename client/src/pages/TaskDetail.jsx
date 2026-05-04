@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 
 const TaskDetail = () => {
   const { id } = useParams();
   const { user, token } = useAuth();
-  const [task, setTask] = down => useState(null);
+  const { addToast } = useToast();
+  const [task, setTask] = useState(null);
   const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -49,15 +51,15 @@ const TaskDetail = () => {
         body: JSON.stringify({ taskId: id, submissionUrl: subUrl, notes })
       });
       if (res.ok) {
-        alert('Work submitted successfully!');
+        addToast('Work submitted successfully!', 'success');
         setSubUrl('');
         setNotes('');
       } else {
         const err = await res.json();
-        alert(err.message);
+        addToast(err.message, 'error');
       }
     } catch (err) {
-      alert('Error submitting work');
+      addToast('Error submitting work', 'error');
     } finally {
       setSubmitting(false);
     }
@@ -77,10 +79,14 @@ const TaskDetail = () => {
         body: JSON.stringify({ status, rating, feedback })
       });
       if (res.ok) {
+        addToast(`Submission ${status.toLowerCase()}`, 'success');
         fetchTaskDetails(); // Refresh list
+      } else {
+        const err = await res.json();
+        addToast(err.message, 'error');
       }
     } catch (err) {
-      console.error(err);
+      addToast('Error evaluating submission', 'error');
     }
   };
 
