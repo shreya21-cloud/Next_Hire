@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ToastProvider } from './context/ToastContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -18,8 +19,9 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Navbar />
+      <ToastProvider>
+        <Router>
+          <Navbar />
         <main className="container" style={{ minHeight: 'calc(100vh - 80px)', padding: '2rem 1rem' }}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -52,6 +54,7 @@ function App() {
           </Routes>
         </main>
       </Router>
+      </ToastProvider>
     </AuthProvider>
   );
 }

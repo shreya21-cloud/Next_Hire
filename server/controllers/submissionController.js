@@ -91,3 +91,27 @@ export const evaluateSubmission = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
+// @route GET /api/submissions/student/me
+export const getSubmissionsByStudent = async (req, res) => {
+  try {
+    if (req.user.role !== 'STUDENT') {
+      return res.status(403).json({ message: 'Only students can view their submissions' });
+    }
+
+    const submissions = await Submission.find({ studentId: req.user.userId })
+      .populate({
+        path: 'taskId',
+        select: 'title bountyAmount status recruiterId',
+        populate: {
+          path: 'recruiterId',
+          select: 'companyName name'
+        }
+      })
+      .sort({ createdAt: -1 });
+      
+    res.status(200).json(submissions);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};

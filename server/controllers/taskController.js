@@ -47,3 +47,16 @@ export const getTaskById = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
+// @route GET /api/tasks/recruiter/me
+export const getTasksByRecruiter = async (req, res) => {
+  try {
+    if (req.user.role !== 'RECRUITER') {
+      return res.status(403).json({ message: 'Not authorized' });
+    }
+    const tasks = await Task.find({ recruiterId: req.user.userId }).sort({ createdAt: -1 });
+    res.status(200).json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
