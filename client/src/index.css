@@ -24,6 +24,24 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40%; /* Adjust size as needed */
+  opacity: 0.05; /* Faint watermark effect */
+  pointer-events: none; /* Allows clicking through the background */
+  z-index: -1;
 }
 
 a {
