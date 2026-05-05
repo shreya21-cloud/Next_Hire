@@ -41,7 +41,12 @@ body::before {
   background-size: 40%; /* Adjust size as needed */
   opacity: 0.05; /* Faint watermark effect */
   pointer-events: none; /* Allows clicking through the background */
-  z-index: -1;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
 }
 
 a {
