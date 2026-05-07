@@ -17,15 +17,8 @@ const Navbar = () => {
         boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
         borderRadius: '16px'
       }}>
-        <Link to="/" style={{ 
-          fontSize: '1.75rem', 
-          fontWeight: '800', 
-          background: 'linear-gradient(135deg, var(--accent-purple), var(--accent-blue))', 
-          WebkitBackgroundClip: 'text', 
-          WebkitTextFillColor: 'transparent', 
-          letterSpacing: '-1px' 
-        }}>
-          NextHire
+        <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="/logo.png" alt="NextHire Logo" style={{ height: '40px', width: 'auto' }} />
         </Link>
         
         <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
