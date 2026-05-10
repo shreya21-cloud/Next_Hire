@@ -69,3 +69,23 @@ export const getMe = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
+// @route PATCH /api/auth/profile
+export const updateProfile = async (req, res) => {
+  try {
+    const { name, bio, skills, companyName } = req.body;
+    const user = await User.findById(req.user.userId);
+    
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (name) user.name = name;
+    if (bio !== undefined) user.bio = bio;
+    if (skills) user.skills = skills;
+    if (companyName) user.companyName = companyName;
+
+    await user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};

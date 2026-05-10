@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['STUDENT', 'RECRUITER'], required: true },
   companyName: { type: String }, // For recruiters
   skills: [{ type: String }], // For students
+  bio: { type: String, default: '' },
   averageRating: { type: Number, default: 0 },
   completedTasks: { type: Number, default: 0 }
 }, { timestamps: true });

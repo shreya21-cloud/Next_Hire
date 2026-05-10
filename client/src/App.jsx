@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import Navbar from './components/Navbar';
 import TaskBoard from './pages/TaskBoard';
 import TaskDetail from './pages/TaskDetail';
+import Profile from './pages/Profile';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -32,6 +33,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <Profile />
                 </ProtectedRoute>
               } 
             />
