@@ -89,3 +89,16 @@ export const updateProfile = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
+// @route GET /api/auth/leaderboard
+export const getLeaderboard = async (req, res) => {
+  try {
+    const topStudents = await User.find({ role: 'STUDENT' })
+      .sort({ averageRating: -1, completedTasks: -1 })
+      .limit(10)
+      .select('name skills averageRating completedTasks bio');
+    res.status(200).json(topStudents);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};

@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import TaskBoard from './pages/TaskBoard';
 import TaskDetail from './pages/TaskDetail';
 import Profile from './pages/Profile';
+import Leaderboard from './pages/Leaderboard';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -44,6 +45,7 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+            <Route path="/leaderboard" element={<Leaderboard />} />
             <Route 
               path="/tasks" 
               element={

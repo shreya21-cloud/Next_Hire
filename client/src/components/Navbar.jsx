@@ -22,6 +22,7 @@ const Navbar = () => {
         </Link>
         
         <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+          <Link to="/leaderboard" style={{ fontWeight: '500', color: 'var(--text-secondary)', transition: 'color 0.2s' }} onMouseOver={(e) => e.target.style.color = 'var(--accent-purple)'} onMouseOut={(e) => e.target.style.color = 'var(--text-secondary)'}>Leaderboard</Link>
           {user ? (
             <>
               <Link to="/tasks" style={{ fontWeight: '500', color: 'var(--text-secondary)', transition: 'color 0.2s' }} onMouseOver={(e) => e.target.style.color = 'var(--accent-purple)'} onMouseOut={(e) => e.target.style.color = 'var(--text-secondary)'}>Task Board</Link>
